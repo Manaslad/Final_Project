@@ -1267,26 +1267,49 @@ h3 {
         display: none !important;
     }
 
-    /* Loader Mobile Optimization */
+    /* Loader Mobile Optimization — Centered & Fully Visible */
     #loader {
-        padding: 25vh 8vw !important;
+        padding: 0 5vw !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: center !important;
+    }
+
+    #loader > .line {
+        justify-content: center !important;
+        gap: 2.5vw !important;
+        flex-wrap: wrap !important;
+        width: 100% !important;
+        overflow: visible !important;
+        margin-bottom: 1.5vw !important;
     }
 
     #loader>.line>h1 {
-        font-size: 8.5vw !important;
+        font-size: 9vw !important;
+        line-height: 10vw !important;
+        text-align: center !important;
     }
 
     .line>h2 {
-        font-size: 7.5vw !important;
+        font-size: 8vw !important;
+        text-align: center !important;
+    }
+
+    #line1-part1 {
+        justify-content: center !important;
+        gap: 2vw !important;
     }
 
     #line1-part1>h5,
     #line1-part1>h6 {
-        font-size: 4vw !important;
+        font-size: 4.5vw !important;
     }
 
     #line1-part1>h5 {
-        width: 6vw !important;
+        width: 8vw !important;
+        text-align: center !important;
     }
 
     /* Page 1 (Hero & Nav) */
