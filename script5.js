@@ -1,14 +1,17 @@
+// Detect if device screen is mobile/tablet width
+const isMobile = window.innerWidth <= 768;
+
 function loco() {
+  if (isMobile) {
+    return; // Disable Locomotive Scroll on mobile/tablet for smooth native scroll
+  }
+
   gsap.registerPlugin(ScrollTrigger);
 
   const locoScroll = new LocomotiveScroll({
     el: document.querySelector("#main"),
     smooth: true,
-
-    // for tablet smooth
     tablet: { smooth: true },
-
-    // for mobile
     smartphone: { smooth: true }
   });
   locoScroll.on("scroll", ScrollTrigger.update);
@@ -27,228 +30,199 @@ function loco() {
         height: window.innerHeight
       };
     }
-
-    // follwoing line is not required to work pinning on touch screen
-
-    /* pinType: document.querySelector("#main").style.transform
-      ? "transform"
-      : "fixed"*/
   });
 
-
-
   ScrollTrigger.addEventListener("refresh", () => locoScroll.update());
-
   ScrollTrigger.refresh();
-
 }
 loco();
 
 function loader() {
-
-
-  var tl = gsap.timeline()
+  var tl = gsap.timeline();
 
   tl.from(".line h1", {
     y: 150,
     stagger: 0.25,
     duration: 0.6,
     delay: 0.3
-  })
+  });
+
   tl.from("#line1-part1", {
     opacity: 0,
     onStart: function () {
-      var h5timer = document.querySelector("#line1-part1 > h5")
+      var h5timer = document.querySelector("#line1-part1 > h5");
       var grow = 0;
 
       setInterval(function () {
         if (grow < 100) {
           h5timer.innerHTML = grow++;
-        }
-        else {
+        } else {
           h5timer.innerHTML = grow;
-
         }
-      }, 35)
+      }, 35);
     },
   });
 
   tl.to(".line>h2", {
     animationName: "anime",
     opacity: 1,
-  })
+  });
 
   tl.to("#loader", {
-    // y:-500,
     opacity: 0,
     duration: 0.6,
     delay: 3.8,
-  })
+  });
+
   tl.from("#page1", {
     opacity: 0,
     delay: 0.2,
     y: 1600,
     duration: 0.6,
     ease: Power4,
-  })
+  });
+
   tl.to("#loader", {
     display: "none"
-  })
+  });
 
   // center animation //
-
   tl.from(".hero1 h1 , .hero2 h1, .hero3 h2, h3 , .hero4 h1", {
     y: 120,
     stagger: 0.2
-  })
+  });
+
   tl.from("#nav", {
     opacity: 0,
-  })
+  });
 
-  tl.from("#hero1 , #page2",
-    {
-      opacity: 0,
-
-    },
-    "-=1.2"
-  )
+  tl.from("#hero1 , #page2", {
+    opacity: 0,
+  }, "-=1.2");
 }
-
 loader();
 
 function cursor_magnetik_effect() {
+  if (isMobile) return; // Disable custom cursor magnetic effect on touch devices
+
   document.addEventListener("mousemove", function (dets) {
     gsap.to("#cursor", {
       x: dets.clientX,
       y: dets.clientY,
       duration: 1,
       ease: "elastic.out(1,0.5)"
-    })
-  })
+    });
+  });
 
   Shery.makeMagnet(".nav-p3 h4");
 }
 cursor_magnetik_effect();
 
+// Video animation and cursor centering
+function video_cursor_and_play() {
+  var container = document.querySelector("#container");
+  var video_cursor = document.querySelector("#video-cursor");
+  var video = document.querySelector("#container video");
 
-var container = document.querySelector("#container")
-var video_cursor = document.querySelector("#video-cursor")
-var video = document.querySelector("#container video")
-container.addEventListener("mouseenter", function () {
-  container.addEventListener("mousemove", function (dets) {
+  if (!isMobile) {
+    container.addEventListener("mouseenter", function () {
+      container.addEventListener("mousemove", function (dets) {
+        gsap.to("#cursor", {
+          opacity: 0
+        });
+        gsap.to(video_cursor, {
+          left: dets.x - 570,
+          y: dets.y - 300,
+        });
+      });
 
-    gsap.to("#cursor",
-      {
-        opacity: 0
-      }
-    )
-    gsap.to(video_cursor, {
-      left: dets.x - 570,
-      y: dets.y - 300,
-    })
-  })
+      container.addEventListener("mouseleave", function (dets) {
+        gsap.to("#cursor", {
+          opacity: 1
+        });
+        gsap.to(video_cursor, {
+          left: "55vw",
+          top: "-4vw"
+        });
+      });
+    });
+  }
 
-  container.addEventListener("mouseleave", function (dets) {
-
-    gsap.to("#cursor",
-      {
-        opacity: 1
-      }
-    )
-    gsap.to(video_cursor, {
-      left: "55vw",
-      top: "-4vw"
-    })
-  })
-
-  // container.addEventListener("mousemove",function(elem){
-
-//    vido_cursor.style.left = elem.x + "px";
-//    vido_cursor.style.top = elem.y + "px";
-// }) // it is help for center the cirlce play button of the video. but it is'nt worked.
-
-function video_btn_animation()
-{
-  var flag = 0
+  // Click handler to play/pause video on both mobile and desktop
+  var flag = 0;
   container.addEventListener("click", function () {
     if (flag == 0) {
-      video.play()
-      video.style.opacity = 1
-      document.querySelector("#video-cursor").innerHTML = `<i class="ri-pause-mini-fill"></i>`
-      gsap.to("#video-cursor", {
+      video.play();
+      video.style.opacity = 1;
+      video_cursor.innerHTML = `<i class="ri-pause-mini-fill"></i>`;
+      gsap.to(video_cursor, {
         scale: 0.5
-      })
-      flag = 1
+      });
+      flag = 1;
     } else {
-      video.pause()
-      video.style.opacity = 0
-      document.querySelector("#video-cursor").innerHTML = `<i class="ri-play-mini-fill"></i>`
-      gsap.to("#video-cursor", {
+      video.pause();
+      video.style.opacity = 0;
+      video_cursor.innerHTML = `<i class="ri-play-mini-fill"></i>`;
+      gsap.to(video_cursor, {
         scale: 1
-      })
-      flag = 0
+      });
+      flag = 0;
     }
-  })
+  });
 }
-video_btn_animation();
-}
-)
+video_cursor_and_play();
 
-function flag_animation()
-{
-      document.addEventListener("mousemove",function(dets){
-        gsap.to("#flag",{
-          x:dets.x,
-          y:dets.y
-        })
-      })
+function flag_animation() {
+  if (isMobile) return; // Disable flag animation on mobile
 
-      document.querySelector(".hero3").addEventListener("mouseenter",function(){
-        gsap.to("#flag",{
-          opacity:1
-        })
-      })
-      document.querySelector(".hero3").addEventListener("mouseleave",function(){
-        gsap.to("#flag",{
-          opacity:0
-        })
-      })
+  document.addEventListener("mousemove", function (dets) {
+    gsap.to("#flag", {
+      x: dets.x,
+      y: dets.y
+    });
+  });
+
+  document.querySelector(".hero3").addEventListener("mouseenter", function () {
+    gsap.to("#flag", {
+      opacity: 1
+    });
+  });
+  document.querySelector(".hero3").addEventListener("mouseleave", function () {
+    gsap.to("#flag", {
+      opacity: 0
+    });
+  });
 }
 flag_animation();
 
 function sheryanimation() {
+  if (isMobile) return; // Disable Shery effects on mobile (too heavy for phones)
+
   Shery.imageEffect("#inner-img-div , .inner-img-div1 , .inner-img-div2 , .inner-img-div3 , .inner-img-div4  ", {
     style: 5,
     config: { "a": { "value": 2, "range": [0, 30] }, "b": { "value": 0.75, "range": [-1, 1] }, "zindex": { "value": -9996999, "range": [-9999999, 9999999] }, "aspect": { "value": 0.7567002737508771 }, "ignoreShapeAspect": { "value": true }, "shapePosition": { "value": { "x": 0, "y": 0 } }, "shapeScale": { "value": { "x": 0.5, "y": 0.5 } }, "shapeEdgeSoftness": { "value": 0, "range": [0, 0.5] }, "shapeRadius": { "value": 0, "range": [0, 2] }, "currentScroll": { "value": 0 }, "scrollLerp": { "value": 0.07 }, "gooey": { "value": true }, "infiniteGooey": { "value": false }, "growSize": { "value": 4, "range": [1, 15] }, "durationOut": { "value": 1, "range": [0.1, 5] }, "durationIn": { "value": 1.5, "range": [0.1, 5] }, "displaceAmount": { "value": 0.5 }, "masker": { "value": true }, "maskVal": { "value": 1.27, "range": [1, 5] }, "scrollType": { "value": 0 }, "geoVertex": { "range": [1, 64], "value": 1 }, "noEffectGooey": { "value": true }, "onMouse": { "value": 1 }, "noise_speed": { "value": 0.2, "range": [0, 10] }, "metaball": { "value": 0.46, "range": [0, 2] }, "discard_threshold": { "value": 0.59, "range": [0, 1] }, "antialias_threshold": { "value": 0, "range": [0, 0.1] }, "noise_height": { "value": 0.5, "range": [0, 2] }, "noise_scale": { "value": 10, "range": [0, 100] } },
     gooey: true,
-
   });
 }
-sheryanimation();
+sheryananimation();
 
-var hover_box = document.querySelector("#first-part")
+// Footer textillate hover
+var hover_box = document.querySelector("#first-part");
+if (hover_box && !isMobile) {
+  hover_box.addEventListener("mouseover", function () {
+    gsap.from("#footer>#first-part>h1", {
+      opacity: 0,
+      duration: 1,
+      delay: 0,
+      onStart: function () {
+        $('#footer>#first-part>h1').textillate({ in: { effect: 'fadeIn' } });
+      },
+    });
+  });
 
-hover_box.addEventListener("mouseover",function(){
-  gsap.from("#footer>#first-part>h1",{
-    opacity:0,
-    duration:1,
-    delay:0,
-    onStart:function(){
-      $('#footer>#first-part>h1').textillate({ in: { effect: 'fadeIn' } });
-    },
-    
-  })
-
-  // console.log("hell0"); 
-})
-
-hover_box.addEventListener("mouseout",function(){
-  gsap.from("#footer>#first-part>h1",{
-    opacity:1,    
-  })
-
-  // console.log("hell0"); 
-})
-
-
-
+  hover_box.addEventListener("mouseout", function () {
+    gsap.from("#footer>#first-part>h1", {
+      opacity: 1,
+    });
+  });
+}
