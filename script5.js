@@ -201,102 +201,11 @@ function flag_animation() {
 flag_animation();
 
 function sheryanimation() {
-  // Desktop config — full quality
-  var desktopConfig = {
-    "a": { "value": 2, "range": [0, 30] },
-    "b": { "value": 0.75, "range": [-1, 1] },
-    "zindex": { "value": -9996999, "range": [-9999999, 9999999] },
-    "aspect": { "value": 0.7567002737508771 },
-    "ignoreShapeAspect": { "value": true },
-    "shapePosition": { "value": { "x": 0, "y": 0 } },
-    "shapeScale": { "value": { "x": 0.5, "y": 0.5 } },
-    "shapeEdgeSoftness": { "value": 0, "range": [0, 0.5] },
-    "shapeRadius": { "value": 0, "range": [0, 2] },
-    "currentScroll": { "value": 0 },
-    "scrollLerp": { "value": 0.07 },
-    "gooey": { "value": true },
-    "infiniteGooey": { "value": false },
-    "growSize": { "value": 4, "range": [1, 15] },
-    "durationOut": { "value": 1, "range": [0.1, 5] },
-    "durationIn": { "value": 1.5, "range": [0.1, 5] },
-    "displaceAmount": { "value": 0.5 },
-    "masker": { "value": true },
-    "maskVal": { "value": 1.27, "range": [1, 5] },
-    "scrollType": { "value": 0 },
-    "geoVertex": { "range": [1, 64], "value": 1 },
-    "noEffectGooey": { "value": true },
-    "onMouse": { "value": 1 },
-    "noise_speed": { "value": 0.2, "range": [0, 10] },
-    "metaball": { "value": 0.46, "range": [0, 2] },
-    "discard_threshold": { "value": 0.59, "range": [0, 1] },
-    "antialias_threshold": { "value": 0, "range": [0, 0.1] },
-    "noise_height": { "value": 0.5, "range": [0, 2] },
-    "noise_scale": { "value": 10, "range": [0, 100] }
-  };
-
-  // Mobile config — optimized for touch & performance
-  var mobileConfig = {
-    "a": { "value": 2, "range": [0, 30] },
-    "b": { "value": 0.75, "range": [-1, 1] },
-    "zindex": { "value": -9996999, "range": [-9999999, 9999999] },
-    "aspect": { "value": 0.8 },
-    "ignoreShapeAspect": { "value": true },
-    "shapePosition": { "value": { "x": 0, "y": 0 } },
-    "shapeScale": { "value": { "x": 0.5, "y": 0.5 } },
-    "shapeEdgeSoftness": { "value": 0, "range": [0, 0.5] },
-    "shapeRadius": { "value": 0, "range": [0, 2] },
-    "currentScroll": { "value": 0 },
-    "scrollLerp": { "value": 0.07 },
-    "gooey": { "value": true },
-    "infiniteGooey": { "value": false },
-    "growSize": { "value": 6, "range": [1, 15] },
-    "durationOut": { "value": 0.8, "range": [0.1, 5] },
-    "durationIn": { "value": 1.2, "range": [0.1, 5] },
-    "displaceAmount": { "value": 0.5 },
-    "masker": { "value": true },
-    "maskVal": { "value": 1.5, "range": [1, 5] },
-    "scrollType": { "value": 0 },
-    "geoVertex": { "range": [1, 64], "value": 1 },
-    "noEffectGooey": { "value": true },
-    "onMouse": { "value": 0 },
-    "noise_speed": { "value": 0.3, "range": [0, 10] },
-    "metaball": { "value": 0.5, "range": [0, 2] },
-    "discard_threshold": { "value": 0.5, "range": [0, 1] },
-    "antialias_threshold": { "value": 0, "range": [0, 0.1] },
-    "noise_height": { "value": 0.5, "range": [0, 2] },
-    "noise_scale": { "value": 8, "range": [0, 100] }
-  };
-
-  var selector = "#inner-img-div, .inner-img-div1, .inner-img-div2, .inner-img-div3, .inner-img-div4";
-
-  Shery.imageEffect(selector, {
+  Shery.imageEffect("#inner-img-div , .inner-img-div1 , .inner-img-div2 , .inner-img-div3 , .inner-img-div4  ", {
     style: 5,
-    config: isMobile ? mobileConfig : desktopConfig,
+    config: { "a": { "value": 2, "range": [0, 30] }, "b": { "value": 0.75, "range": [-1, 1] }, "zindex": { "value": -9996999, "range": [-9999999, 9999999] }, "aspect": { "value": 0.7567002737508771 }, "ignoreShapeAspect": { "value": true }, "shapePosition": { "value": { "x": 0, "y": 0 } }, "shapeScale": { "value": { "x": 0.5, "y": 0.5 } }, "shapeEdgeSoftness": { "value": 0, "range": [0, 0.5] }, "shapeRadius": { "value": 0, "range": [0, 2] }, "currentScroll": { "value": 0 }, "scrollLerp": { "value": 0.07 }, "gooey": { "value": true }, "infiniteGooey": { "value": false }, "growSize": { "value": 4, "range": [1, 15] }, "durationOut": { "value": 1, "range": [0.1, 5] }, "durationIn": { "value": 1.5, "range": [0.1, 5] }, "displaceAmount": { "value": 0.5 }, "masker": { "value": true }, "maskVal": { "value": 1.27, "range": [1, 5] }, "scrollType": { "value": 0 }, "geoVertex": { "range": [1, 64], "value": 1 }, "noEffectGooey": { "value": true }, "onMouse": { "value": 1 }, "noise_speed": { "value": 0.2, "range": [0, 10] }, "metaball": { "value": 0.46, "range": [0, 2] }, "discard_threshold": { "value": 0.59, "range": [0, 1] }, "antialias_threshold": { "value": 0, "range": [0, 0.1] }, "noise_height": { "value": 0.5, "range": [0, 2] }, "noise_scale": { "value": 10, "range": [0, 100] } },
     gooey: true,
   });
-
-  // Mobile touch: simulate mouseover/mouseleave on tap for gooey transition
-  if (isMobile) {
-    document.querySelectorAll(selector.split(",").map(function(s) { return s.trim(); }).join(",")).forEach(function(el) {
-      el.addEventListener("touchstart", function(e) {
-        var touch = e.touches[0];
-        el.dispatchEvent(new MouseEvent("mouseenter", {
-          bubbles: true,
-          clientX: touch.clientX,
-          clientY: touch.clientY
-        }));
-        el.dispatchEvent(new MouseEvent("mousemove", {
-          bubbles: true,
-          clientX: touch.clientX,
-          clientY: touch.clientY
-        }));
-      }, { passive: true });
-
-      el.addEventListener("touchend", function() {
-        el.dispatchEvent(new MouseEvent("mouseleave", { bubbles: true }));
-      }, { passive: true });
-    });
-  }
 }
 sheryanimation();
 

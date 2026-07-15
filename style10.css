@@ -1557,23 +1557,6 @@ h3 {
         position: relative !important;
     }
 
-    /* Shery.js WebGL canvas must be touchable & fill container on mobile */
-    ._canvas_container {
-        width: 100% !important;
-        height: 100% !important;
-        position: absolute !important;
-        top: 0 !important;
-        left: 0 !important;
-        pointer-events: auto !important;
-        z-index: 2 !important;
-    }
-
-    ._canvas_container canvas {
-        width: 100% !important;
-        height: 100% !important;
-        display: block !important;
-    }
-
     #inner-img-div>img,
     .inner-img-div1 img,
     .inner-img-div2 img,
