@@ -1267,49 +1267,75 @@ h3 {
         display: none !important;
     }
 
-    /* Loader Mobile Optimization — Centered & Fully Visible */
+    /* ============================================
+       LOADER — GSAP Cutout Effect for Mobile
+       HOW IT WORKS:
+       Each .line has overflow:hidden (clip mask).
+       GSAP animates h1 from y:150 → y:0, so text
+       slides UP through the clip = cutout reveal.
+       We MUST keep overflow:hidden for this effect.
+       ============================================ */
     #loader {
-        padding: 0 5vw !important;
+        padding: 0 6vw !important;
         display: flex !important;
         flex-direction: column !important;
         align-items: center !important;
         justify-content: center !important;
-        text-align: center !important;
+        gap: 3vw !important;
     }
 
+    /* Each .line = clip container for cutout effect */
     #loader > .line {
+        /* KEEP overflow:hidden — this IS the cutout mask */
+        overflow: hidden !important;
+        height: auto !important;
+        min-height: 14vw !important;  /* tall enough for clipped h1 */
+        display: flex !important;
+        align-items: center !important;
         justify-content: center !important;
-        gap: 2.5vw !important;
-        flex-wrap: wrap !important;
+        gap: 3vw !important;
+        flex-wrap: nowrap !important;
         width: 100% !important;
-        overflow: visible !important;
-        margin-bottom: 1.5vw !important;
+        padding-bottom: 1vw !important;
     }
 
-    #loader>.line>h1 {
-        font-size: 9vw !important;
-        line-height: 10vw !important;
+    /* Main loader text — sized to fit 1 line on all phones */
+    #loader > .line > h1 {
+        font-size: clamp(20px, 8.5vw, 52px) !important;
+        line-height: 1.1 !important;
+        text-transform: uppercase !important;
         text-align: center !important;
+        white-space: nowrap !important;
     }
 
-    .line>h2 {
-        font-size: 8vw !important;
+    /* "Now" blinking text */
+    .line > h2 {
+        font-size: clamp(18px, 7.5vw, 46px) !important;
         text-align: center !important;
+        white-space: nowrap !important;
+        flex-shrink: 0 !important;
     }
 
+    /* Counter row: "00 - 100" left of "Your" */
     #line1-part1 {
+        display: flex !important;
+        align-items: center !important;
         justify-content: center !important;
         gap: 2vw !important;
+        flex-shrink: 0 !important;
     }
 
-    #line1-part1>h5,
-    #line1-part1>h6 {
-        font-size: 4.5vw !important;
+    #line1-part1 > h5,
+    #line1-part1 > h6 {
+        font-size: clamp(12px, 4vw, 22px) !important;
+        font-family: font2 !important;
+        white-space: nowrap !important;
     }
 
-    #line1-part1>h5 {
-        width: 8vw !important;
-        text-align: center !important;
+    #line1-part1 > h5 {
+        width: auto !important;
+        min-width: 7vw !important;
+        text-align: right !important;
     }
 
     /* Page 1 (Hero & Nav) */

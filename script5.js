@@ -40,8 +40,12 @@ loco();
 function loader() {
   var tl = gsap.timeline();
 
+  // Cutout reveal: on mobile use smaller y so text slides through clip mask correctly
+  var cutoutY = isMobile ? 80 : 150;
+  var pageSlideY = isMobile ? window.innerHeight * 0.5 : 1600;
+
   tl.from(".line h1", {
-    y: 150,
+    y: cutoutY,
     stagger: 0.25,
     duration: 0.6,
     delay: 0.3
@@ -77,7 +81,7 @@ function loader() {
   tl.from("#page1", {
     opacity: 0,
     delay: 0.2,
-    y: 1600,
+    y: pageSlideY,
     duration: 0.6,
     ease: Power4,
   });
@@ -86,9 +90,10 @@ function loader() {
     display: "none"
   });
 
-  // center animation //
+  // Hero text cutout reveal
+  var heroCutoutY = isMobile ? 60 : 120;
   tl.from(".hero1 h1 , .hero2 h1, .hero3 h2, h3 , .hero4 h1", {
-    y: 120,
+    y: heroCutoutY,
     stagger: 0.2
   });
 
